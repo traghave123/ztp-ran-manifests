@@ -20,6 +20,6 @@ spec:
     vendor: "8086"
     deviceID: "158b"
     pfNames:
-          - ens2f0#0-32
-          - ens7f0#0-32
+          - ens2f0#0-31
+          - ens7f0#0-31
     
