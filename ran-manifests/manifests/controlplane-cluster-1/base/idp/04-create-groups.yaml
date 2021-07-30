@@ -1,0 +1,30 @@
+---
+apiVersion: user.openshift.io/v1
+kind: Group
+metadata:
+  name: Administrators 
+users:
+- altiostar
+- redhat
+---
+apiVersion: user.openshift.io/v1
+kind: Group
+metadata:
+  name: Altiostar 
+users:
+- altiostar
+---
+apiVersion: user.openshift.io/v1
+kind: Group
+metadata:
+  name: RedHat 
+users:
+- redhat
+---
+apiVersion: user.openshift.io/v1
+kind: Group
+metadata:
+  name: IBM 
+users:
+- ibm
+---
