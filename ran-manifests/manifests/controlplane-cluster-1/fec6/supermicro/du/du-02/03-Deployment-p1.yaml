@@ -83,7 +83,7 @@ spec:
               memory: 10Gi
               openshift.io/vran_netdevice_mgmt_mh: 2
               openshift.io/vran_vfio_fh: 1
-              openshift.io/vran_vfio: 1
+              openshift.io/vran_netdevice_mp: 1
               cpu: "18"
             limits:
               ephemeral-storage: 14Gi
@@ -91,7 +91,7 @@ spec:
               memory: 10Gi
               openshift.io/vran_netdevice_mgmt_mh: 2
               openshift.io/vran_vfio_fh: 1
-              openshift.io/vran_vfio: 1
+              openshift.io/vran_netdevice_mp: 1
               cpu: "18"
           securityContext:
             privileged: true
