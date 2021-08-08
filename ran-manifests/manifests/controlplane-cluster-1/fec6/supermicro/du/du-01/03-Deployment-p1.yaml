@@ -49,6 +49,7 @@ spec:
         - name: ani-4g-du1
           image: "vran-prov-server.prov.ibmlab.lan:5000/olmlocal/ani-4g-du:4.0.4g_132_oran_189"
           imagePullPolicy: IfNotPresent
+          command: ["bash","-c","/opt/ani/helm/entrypoint.sh","while true; do sleep 1000; done"]
           envFrom:
             - configMapRef:
                 name: 4glte-du-fec6-cm
