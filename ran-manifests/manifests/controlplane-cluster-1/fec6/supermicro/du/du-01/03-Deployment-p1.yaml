@@ -81,16 +81,16 @@ spec:
               ephemeral-storage: 14Gi
               hugepages-1Gi: 8Gi
               memory: 10Gi
-              openshift.io/vran_netdevice: 2
-              openshift.io/vran_netdevice_fh: 1
+              openshift.io/vran_netdevice_mgmt_mh: 2
+              openshift.io/vran_vfio_fh: 1
               openshift.io/vran_vfio: 1
               cpu: "18"
             limits:
               ephemeral-storage: 14Gi
               hugepages-1Gi: 8Gi
               memory: 10Gi
-              openshift.io/vran_netdevice: 2
-              openshift.io/vran_netdevice_fh: 1
+              openshift.io/vran_netdevice_mgmt_mh: 2
+              openshift.io/vran_vfio_fh: 1
               openshift.io/vran_vfio: 1
               cpu: "18"
           securityContext:
