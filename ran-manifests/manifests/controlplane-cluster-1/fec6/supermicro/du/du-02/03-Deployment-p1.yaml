@@ -49,6 +49,7 @@ spec:
         - name: ani-4g-du1
           image: "vran-prov-server.prov.ibmlab.lan:5000/olmlocal/ani-4g-du:4.0.4g_132_oran_189"
           imagePullPolicy: IfNotPresent
+          command: ["bash","-c","/opt/ani/helm/entrypoint.sh","while true; do sleep 1000; done"]
           envFrom:
             - configMapRef:
                 name: 4glte-du-fec6-cm
@@ -84,6 +85,7 @@ spec:
               openshift.io/vran_netdevice_mgmt_mh: 2
               openshift.io/vran_vfio_fh: 1
               openshift.io/vran_netdevice_mp: 1
+              intel.com/intel_fec_lte: 1
               cpu: "18"
             limits:
               ephemeral-storage: 14Gi
@@ -92,6 +94,7 @@ spec:
               openshift.io/vran_netdevice_mgmt_mh: 2
               openshift.io/vran_vfio_fh: 1
               openshift.io/vran_netdevice_mp: 1
+              intel.com/intel_fec_lte: 1
               cpu: "18"
           securityContext:
             privileged: true
