@@ -34,10 +34,9 @@ spec:
               "ips": ["172.31.13.11/16"]
             },
             {
-              "name": "fec6-vran-fh",
-              "ips": ["10.27.5.201/24"]
+              "name": "fec6-vran-fh"
             }
-            ]
+          ]
     spec:
       terminationGracePeriodSeconds: 20
       serviceAccountName: dp-sa-r
