@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: ani-scripts
-  namespace: altiostar-4g-du-fec6
+  namespace: altiostar-4g-du-fec5
 data:
   entrypoint: |
     #!/bin/bash
@@ -42,11 +42,12 @@ data:
         AR_VF_PCI_ENV=`echo $AR_VF_PCI_ENV_NAME`
     # AR_VF_PCI_ENV_NAME env's value is set by sriov device plugin
         sed -i "/.*ar-intf*/d" /mnt/prov.ini
-        sed -i "/.*ar_nw_enabled*/d" /mnt/prov.ini
+        sed -i "/.*ar-nw-enabled*/d" /mnt/prov.ini
         sed -i "/.*ar-pci-addrs*/d" /mnt/prov.ini
         sed -i "/.*ar-pci-addrss*/d" /mnt/prov.ini
-        echo "ar_nw_enabled: yes" >> /mnt/prov.ini
+        echo "ar-nw-enabled: yes" >> /mnt/prov.ini
         echo "ar-intf: vEth0" >> /mnt/prov.ini
+        echo "ar-mtu: `printenv AR_INTF_MTU`" >> /mnt/prov.ini
         echo "ar-pci-addrs: `printenv $AR_VF_PCI_ENV`" >> /mnt/prov.ini
         echo "ar-pci-addrss: `printenv $AR_VF_PCI_ENV`" >> /mnt/prov.ini
     fi
@@ -68,7 +69,7 @@ data:
     fi
 
     # Go ahead and start the docker entrypoint
-    taskset -c $NRT_APP_SHARED_PHYSICAL_CPUS /opt/ani/scripts/entrypoint.sh
+    exec taskset -c $NRT_APP_SHARED_PHYSICAL_CPUS /opt/ani/scripts/entrypoint.sh
     #source /opt/ani/scripts/entrypoint.sh
 
     if [[ "false" != "${DEBUG_KEEP_POD_ALIVE}" ]]; then
@@ -79,7 +80,8 @@ data:
     #!/bin/bash
 
     find_sibling () {
-      local arr=(`cat /sys/devices/system/cpu/cpu$1/topology/thread_siblings_list | cut -d ":" -f2 | tr -d " " | sed 's/,/ /g'`)
+      # In case of BM machines, we are seeing siblings as comma separated, where as in CVIM vDU we are seeing as - separated
+      local arr=(`cat /sys/devices/system/cpu/cpu$1/topology/thread_siblings_list | cut -d ":" -f2 | tr -d " " | sed -e 's/,/ /g' -e 's/-/ /g'`)
       for sib in "${arr[@]}"
       do
         if [[ "$sib" != "$1" ]]; then
@@ -100,6 +102,13 @@ data:
 
     append_layout () {
       if [[ ${#layout[@]} -lt ${#cores[@]} ]]; then
+        #Check if element already added before
+        for core in "${layout[@]}"
+        do
+          if [[ "$core" == "$1" ]]; then
+            return
+          fi
+        done
         layout+=($1)
       fi
     }
@@ -126,18 +135,30 @@ data:
     parse_allocated_cpu_list_output
     sort_cores
     layout=()
+    > /etc/profile.d/anicpulayout.sh
     for element in "${sorted_cores[@]}"
     do
         sibling=$(find_sibling $element)
-        s_allotted=$(is_sibling_allotted $sibling)
-        #echo "$element --> $sibling --> $s_allotted"
         append_layout $element
-        if $s_allotted; then
+        if is_sibling_allotted $sibling; then
           append_layout $sibling
+          export CPU_SIBLING_FOR_${element}=${sibling}
+          echo "export CPU_SIBLING_FOR_${element}=${sibling}" >> /etc/profile.d/anicpulayout.sh
+        else
+          export CPU_SIBLING_FOR_${element}="NOT_ALLOCATED"
+          echo "export CPU_SIBLING_FOR_${element}=\"NOT_ALLOCATED\"" >> /etc/profile.d/anicpulayout.sh
         fi
     done
     echo ${layout[@]}
 
+    # When this script is invoked from BM or vDU (non-k8s) platform, its job is to only
+    # generate sibling core env list
+    if [ "${IS_MICRO_SERVICE}" != "True" ]; then
+        chmod +x /etc/profile.d/anicpulayout.sh
+        return
+    fi
+
+    echo ${layout[@]}
     export CPU_LAYOUT="${layout[@]}"
     # Set NRT_APP_SHARED_PHYSICAL_CPUS from CPU_LAYOUT (1st 2 entries)
     export NRT_APP_SHARED_PHYSICAL_CPUS="${layout[0]},${layout[1]}"
@@ -163,5 +184,6 @@ data:
 
     echo "export CPU_LAYOUT='${layout[@]}'
     export NRT_APP_SHARED_PHYSICAL_CPUS='${layout[0]},${layout[1]}'
-    export PHYSICAL_RT_CPU_LIST='$rt_cpus'" > /etc/profile.d/anicpulayout.sh
+    export PHYSICAL_RT_CPU_LIST='$rt_cpus'" >> /etc/profile.d/anicpulayout.sh
+
     chmod +x /etc/profile.d/anicpulayout.sh
