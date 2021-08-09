@@ -6,8 +6,8 @@ metadata:
 data:
   prov.ini:   |
     panel-id: 44
-    hostname: vrandu1-test.com
-    serial-no: DU98JUNKA90001
+    hostname: vrandu1-test
+    serial-no: vrandu1-test
     mgmt-intf: net1
     mh-intf: net2
     mp-intf: net3
@@ -19,7 +19,7 @@ data:
     ar-nw-enabled: False
     tim-pod-present: True
     device-type: RIU-D
-    vcu-fqdn: rhocp-ldc6-cu-01.rma.lan
+    vcu-fqdn: 172.31.10.10
     mp-vlan-id: 2013 
     fh-vlan-id: 2012
     riu-vlan-id: 2012
