@@ -37,7 +37,7 @@ spec:
                macAddress: 56:91:90:01:01:02
                sriov: {}
             -  name: nic3
-               macAddress: 56:0a:90:03:01:03
+               macAddress: 56:91:90:01:01:03
                sriov: {}
         resources:
           requests:
@@ -70,7 +70,7 @@ spec:
                 addresses: [ 10.27.3.203/24 ]
                 set-name: ens3
                 match:
-                  macaddress: 56:0a:90:03:01:03
+                  macaddress: 56:91:90:01:01:03
           userData: |-
               #cloud-config
               hostname: rhocp-ldc6-cu-01
@@ -81,15 +81,15 @@ spec:
                     default-route: eth0
                     ntp-ip: 10.50.0.10
                     ns-ip: 10.50.0.10
-                    ems-fqdn: 10.50.0.10
+                    ems-fqdn: 172.31.10.112
                     ems-snmp-port: 162
                     oran-support: yes
-                    enb-id: 2001
+                    enb-id: 17003
                     nw-type: nw_type
                     nw-init-method: method
                     mgmt-nics: 56:91:90:01:01:01
                     mh-nics: 56:91:90:01:01:02
-                    bh-nics: 56:0a:90:03:01:03
+                    bh-nics: 56:91:90:01:01:03
                   owner: root:root
                   permissions: '0644'
         name: cloudinitdisk
