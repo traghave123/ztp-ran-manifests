@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: ani-scripts
-  namespace: altiostar-4g-du-fec5
+  namespace: altiostar-4g-du-fec6
 data:
   entrypoint: |
     #!/bin/bash
