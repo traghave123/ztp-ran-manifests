@@ -2,14 +2,14 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: ani-scripts
-  namespace: altiostar-4g-du-fec6
+  namespace: altiostar-4g-du-fec5
 data:
   entrypoint: |
     #!/bin/bash
-​
+
     # Entrypoint script used for 4G Helm DU deployment.
     # Used for custom handling of 4G DU inputs
-​
+
     # If condition for ensuring backward compatibility
     if [ -f /prov-config/prov.ini ]; then
         # Copy the prov.ini from configmap volume to /mnt/ directory
@@ -18,10 +18,10 @@ data:
     else
         echo "Using POD Yaml based deployment"
     fi
-​
+
     #Default is false if not set
     DEBUG_KEEP_POD_ALIVE=${DEBUG_KEEP_POD_ALIVE:-"false"}
-​
+
     # ------- Networking Section Start -------
     if [ $HOST_NETWORKING = "false" ]; then
         # HACK: Feed the FH PCI address of DPDK VF to prov.ini
@@ -59,7 +59,7 @@ data:
         #echo "fec-off-pci-addrs: `printenv $FPGA_VF_PCI_ENV`" >> /mnt/prov.ini
         #fi
     # ------- Networking Section End -------
-​
+
     # If condition for ensuring backward compatibility
     if [[ -z "${CPU_LAYOUT}" ]]; then
         # Generate cpu affinity layout and update CPU_LAYOUT env
@@ -67,18 +67,18 @@ data:
     else
         echo "CPU_LAYOUT preset as $CPU_LAYOUT"
     fi
-​
+
     # Go ahead and start the docker entrypoint
     exec taskset -c $NRT_APP_SHARED_PHYSICAL_CPUS /opt/ani/scripts/entrypoint.sh
     #source /opt/ani/scripts/entrypoint.sh
-​
+
     if [[ "false" != "${DEBUG_KEEP_POD_ALIVE}" ]]; then
         sleep infinity
     fi
-​
+
   cpuLayout: |
     #!/bin/bash
-​
+
     find_sibling () {
       # In case of BM machines, we are seeing siblings as comma separated, where as in CVIM vDU we are seeing as - separated
       local arr=(`cat /sys/devices/system/cpu/cpu$1/topology/thread_siblings_list | cut -d ":" -f2 | tr -d " " | sed -e 's/,/ /g' -e 's/-/ /g'`)
@@ -89,7 +89,7 @@ data:
         fi
       done
     }
-​
+
     is_sibling_allotted () {
       for core in "${cores[@]}"
       do
@@ -99,7 +99,7 @@ data:
       done
       return 1 # false
     }
-​
+
     append_layout () {
       if [[ ${#layout[@]} -lt ${#cores[@]} ]]; then
         #Check if element already added before
@@ -112,7 +112,7 @@ data:
         layout+=($1)
       fi
     }
-​
+
     parse_allocated_cpu_list_output () {
       local range=(`cat /sys/fs/cgroup/cpuset/cpuset.cpus`)
       # echo $range
@@ -123,13 +123,13 @@ data:
       unset IFS
       # echo ${cores[@]}
     }
-​
+
     sort_cores () {
       #IFS=$'\n' sorted=($(sort -r <<<"${cores[*]}"))
       IFS=$'\n' sorted_cores=($(sort -n <<<"${cores[*]}"))
       unset IFS
     }
-​
+
     cores=()
     sorted_cores=()
     parse_allocated_cpu_list_output
@@ -150,14 +150,14 @@ data:
         fi
     done
     echo ${layout[@]}
-​
+
     # When this script is invoked from BM or vDU (non-k8s) platform, its job is to only
     # generate sibling core env list
     if [ "${IS_MICRO_SERVICE}" != "True" ]; then
         chmod +x /etc/profile.d/anicpulayout.sh
         return
     fi
-​
+
     echo ${layout[@]}
     export CPU_LAYOUT="${layout[@]}"
     # Set NRT_APP_SHARED_PHYSICAL_CPUS from CPU_LAYOUT (1st 2 entries)
@@ -181,9 +181,9 @@ data:
     done | paste -sd ","`
     echo $rt_cpus
     export PHYSICAL_RT_CPU_LIST=$rt_cpus
-​
+
     echo "export CPU_LAYOUT='${layout[@]}'
     export NRT_APP_SHARED_PHYSICAL_CPUS='${layout[0]},${layout[1]}'
     export PHYSICAL_RT_CPU_LIST='$rt_cpus'" >> /etc/profile.d/anicpulayout.sh
-​
+
     chmod +x /etc/profile.d/anicpulayout.sh
