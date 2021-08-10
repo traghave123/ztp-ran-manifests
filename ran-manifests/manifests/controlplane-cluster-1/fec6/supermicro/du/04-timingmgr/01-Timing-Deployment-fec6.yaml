@@ -29,7 +29,7 @@ spec:
       initContainers:
       # This container copy the PMC binary to /ptp/pmc
       - name: ose-ptp
-        image: registry.redhat.io/openshift4/ose-ptp:v4.6
+        image: vran-prov-server.prov.ibmlab.lan:5000/olm/openshift4-ose-ptp:52fc9ffd
         command:
           - /bin/bash
           - -c
