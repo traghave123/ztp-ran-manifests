@@ -12,15 +12,15 @@ data:
     mh-intf: net2
     mp-intf: net3
     fh-intf: net4
-    oran-support: True
-    skip-sw-upgrade: True
+    oran-support: yes
+    skip-sw-upgrade: yes
     nw-type: v4
-    ha-enabled: True
-    ar-nw-enabled: False
-    tim-pod-present: True
+    ha-enabled: yes
+    ar-nw-enabled: no
+    tim-pod-present: yes
     device-type: RIU-D
     vcu-fqdn: 172.31.10.10
     mp-vlan-id: 2013 
     fh-vlan-id: 2012
     riu-vlan-id: 2012
-    initial_rtd_check: False
+    initial_rtd_check: no
