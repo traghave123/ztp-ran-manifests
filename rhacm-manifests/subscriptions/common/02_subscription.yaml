@@ -6,8 +6,8 @@ metadata:
   labels:
     app: common-ran-subscription
   annotations:
-    apps.open-cluster-management.io/git-path: manifests/common
-    apps.open-cluster-management.io/git-branch: main
+    apps.open-cluster-management.io/git-path: rhacm-manifests/manifests/common
+    apps.open-cluster-management.io/git-branch: master
 spec:
   channel: common-ran-subscriptions/common-ran-subscription 
   placement:
