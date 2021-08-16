@@ -4,7 +4,6 @@ kind: Kustomization
 
 bases:
   - ./du-01  
-  - ./du-02  
 
 resources:
   - 40-controlplane-cluster-1-fec6-supermicro-du.yaml  
