@@ -74,7 +74,7 @@ metadata:
 spec:
   resourceName: vran_netdevice_mgmt_mh
   networkNamespace: altiostar-4g-du-fec6
-  vlan: 805
+  vlan: 2010
  
   ipam: |-
     {"type": "static"}
