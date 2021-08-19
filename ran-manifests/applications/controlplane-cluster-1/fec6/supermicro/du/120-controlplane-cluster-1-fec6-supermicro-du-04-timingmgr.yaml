@@ -18,7 +18,7 @@ spec:
   source:
     repoURL: 'https://github.com/traghave123/ztp-ran-manifests.git'
     targetRevision: HEAD
-    path: ran-manifests/manifests/controlplane-cluster-1/fec6/supermicro/du/04-timingmgr/04-timingmgr
+    path: ran-manifests/manifests/controlplane-cluster-1/fec6/supermicro/du/04-timingmgr
     directory:
       recurse: false
   # Sync policy
