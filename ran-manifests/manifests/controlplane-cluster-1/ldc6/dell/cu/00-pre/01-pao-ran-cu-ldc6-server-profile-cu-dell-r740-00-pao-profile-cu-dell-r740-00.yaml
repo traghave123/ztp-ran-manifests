@@ -18,4 +18,5 @@ spec:
       node: 1 
   numa:
     topologyPolicy: best-effort  
-    nodeSelector: node-role.kubernetes.io/ran-cu-ldc6-server-profile-cu-dell-r740-00: ""
+  nodeSelector: 
+    node-role.kubernetes.io/ran-cu-ldc6-server-profile-cu-dell-r740-00: ""
