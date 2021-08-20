@@ -2,19 +2,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-commonLabels:
-  # Each SITE_ID is a different zone
-  topology.kubernetes.io/zone: ran-du-fec6-server-profile-du-supermicro00
+bases:
+  - ./du-01  
+  - ./du-02  
 
-commonAnnotations:
- #argocd.argoproj.io/sync-wave: "20"
- argocd.argoproj.io/sync-options: Prune=false
- argocd.argoproj.io/compare-options: IgnoreExtraneous
-# Apps of Apps
 resources:
-  - 40-controlplane-cluster-1-fec6-supermicro-du.yaml
+  - 40-controlplane-cluster-1-fec6-supermicro-du.yaml  
   - 50-controlplane-cluster-1-fec6-supermicro-du-00-pre.yaml
-  - 60-controlplane-cluster-1-fec6-supermicro-du-01-post.yaml
+  - 60-controlplane-cluster-1-fec6-supermicro-du-01-post.yaml  
   - 70-controlplane-cluster-1-fec6-supermicro-du-02-configs.yaml
   - 80-controlplane-cluster-1-fec6-supermicro-du-03-n3k.yaml
   - 90-controlplane-cluster-1-fec6-supermicro-du-n3k-sriov.yaml
