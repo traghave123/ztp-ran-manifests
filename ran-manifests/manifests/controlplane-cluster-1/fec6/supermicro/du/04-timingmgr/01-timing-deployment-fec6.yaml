@@ -77,7 +77,7 @@ spec:
       - name: socket-dir
         hostPath:
           path: "/var/run/ptp/"
-          type: Directory
+          type: DirectoryOrCreate
       tolerations:
         - key: "node.kubernetes.io/unreachable"
           operator: "Exists"
