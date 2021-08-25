@@ -15,8 +15,5 @@ spec:
       node: 0 
   numa:
     topologyPolicy: best-effort
-    
-  realTimeKernel:
-    enabled: true 
   nodeSelector:
     node-role.kubernetes.io/ran-du-fec6-server-profile-du-supermicro00: ""
