@@ -25,6 +25,7 @@ rules:
       - patch
   - apiGroups:
       - apps
+      - extensions
     resources:
       - daemonsets
       - deployments
