@@ -16,6 +16,15 @@ rules:
       - get
       - list
   - apiGroups:
+      - apps
+    resources:
+      - daemonsets
+      - deployments
+    verbs:
+      - get
+      - list  
+      - watch
+  - apiGroups:
       - ""
     resources:
       - nodes
