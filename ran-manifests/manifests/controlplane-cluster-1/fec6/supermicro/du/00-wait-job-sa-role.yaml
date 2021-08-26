@@ -17,6 +17,7 @@ rules:
       - list
   - apiGroups:
       - apps
+      - extensions
     resources:
       - daemonsets
       - deployments
