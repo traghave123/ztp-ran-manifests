@@ -24,6 +24,15 @@ rules:
       - list 
       - patch
   - apiGroups:
+      - apps
+    resources:
+      - daemonsets
+      - deployments
+    verbs:
+      - get
+      - list  
+      - watch      
+  - apiGroups:
       - sriovnetwork.openshift.io
     resources:
       - sriovnetworknodepolicies
