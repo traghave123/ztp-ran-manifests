@@ -1,0 +1,17 @@
+# These manifests apply to every RAN cluster
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonLabels:
+  cluster: base-ran
+
+
+resources:
+  
+  - 02-config-ingress-label-selector.yaml
+  
+  - 03-configmap-quay-leo.yaml
+  - 04-image-addtrustedCA-leo.yaml
+  
+  - 50-ran-enable-sctp.yaml

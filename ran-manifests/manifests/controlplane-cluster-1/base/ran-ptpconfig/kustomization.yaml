@@ -1,0 +1,11 @@
+# These manifests apply to every RAN cluster
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonLabels:
+  cluster: base-ran-du
+
+resources:
+  # PTP (feature label selector)
+  - 01-config-ptp-label-selector.yaml
