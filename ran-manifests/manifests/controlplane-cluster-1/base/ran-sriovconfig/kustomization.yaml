@@ -1,0 +1,12 @@
+# These manifests apply to every RAN cluster
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonLabels:
+  cluster: base-ransriovconfig
+
+
+resources:
+  
+  - 01-config-sriov-label-selector.yaml
