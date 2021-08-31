@@ -1,0 +1,11 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonAnnotations:  
+#  argocd.argoproj.io/sync-wave: "10"
+  argocd.argoproj.io/sync-options: Prune=false
+  argocd.argoproj.io/compare-options: IgnoreExtraneous 
+
+resources:
+  - 01-install.yaml
