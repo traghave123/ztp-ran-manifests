@@ -2,9 +2,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-bases:
-  - ./cu-02  
-
 resources:
   - 40-controlplane-cluster-1-ldc6-dell-cu.yaml  
   - 50-controlplane-cluster-1-ldc6-dell-cu-00-pre.yaml
