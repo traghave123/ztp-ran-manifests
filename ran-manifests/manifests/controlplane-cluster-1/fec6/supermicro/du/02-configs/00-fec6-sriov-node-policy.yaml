@@ -15,7 +15,7 @@ spec:
   deviceType: vfio-pci
   priority: 10
   #mtu: 1500
-  numVfs: 32
+  numVfs: 64
   nicSelector:
     vendor: "8086"
     deviceID: "158b"
@@ -38,7 +38,7 @@ spec:
   deviceType: vfio-pci
   priority: 10
   #mtu: 1500
-  numVfs: 32
+  numVfs: 64
   nicSelector:
     vendor: "8086"
     deviceID: "158b"
@@ -61,7 +61,7 @@ spec:
   deviceType: netdevice
   priority: 10
   #mtu: 1500
-  numVfs: 32
+  numVfs: 64
   nicSelector:
     vendor: "8086"
     deviceID: "158b"
@@ -84,7 +84,7 @@ spec:
   deviceType: netdevice
   priority: 10
   #mtu: 1500
-  numVfs: 32
+  numVfs: 64
   nicSelector:
     vendor: "8086"
     deviceID: "158b"
