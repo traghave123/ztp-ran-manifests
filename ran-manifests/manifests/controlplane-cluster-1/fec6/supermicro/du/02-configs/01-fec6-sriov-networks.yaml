@@ -9,7 +9,7 @@ metadata:
 spec:
   resourceName: vran_vfio_fh
   networkNamespace: altiostar-4g-du-fec6
-  vlan: 2012
+  vlan: 2001
   ipam: |-
     {}
   linkState: auto  
@@ -52,7 +52,7 @@ metadata:
 spec:
   resourceName: vran_netdevice_mp
   networkNamespace: altiostar-4g-du-fec6
-  vlan: 2013
+  vlan: 2003
  
   ipam: |-
     {"type": "static"}
