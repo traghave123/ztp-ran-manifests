@@ -11,11 +11,11 @@ spec:
         - pciAddress: 0000:6a:00.0
           pfDriver: pci-pf-stub
           vfDriver: vfio-pci
-          vfAmount: 8
+          vfAmount: 2
           bbDevConfig:
             n3000:
               networkType: "FPGA_LTE"
-              pfMode: False
+              pfMode: false
               flrTimeout: 610
               downlink:
                 bandwidth: 3
@@ -23,22 +23,22 @@ spec:
                 queues:
                   vf0: 16
                   vf1: 16
-                  vf2: 16
-                  vf3: 16
-                  vf4: 16
-                  vf5: 16
-                  vf6: 16
-                  vf7: 16
+                  vf2: 0
+                  vf3: 0
+                  vf4: 0
+                  vf5: 0
+                  vf6: 0
+                  vf7: 0
               uplink:
                 bandwidth: 12
                 loadBalance: 128
                 queues:
                   vf0: 16
                   vf1: 16
-                  vf2: 16
-                  vf3: 16
-                  vf4: 16
-                  vf5: 16
-                  vf6: 16
-                  vf7: 16
+                  vf2: 0
+                  vf3: 0
+                  vf4: 0
+                  vf5: 0
+                  vf6: 0
+                  vf7: 0
     
