@@ -79,22 +79,22 @@ spec:
           resources:
             requests:
               ephemeral-storage: 10Gi
-              hugepages-1Gi: 4Gi
+              hugepages-1Gi: 10Gi
               memory: 10Gi
               openshift.io/vran_netdevice_mgmt_mh: 2
               openshift.io/vran_netdevice_mp: 1
               openshift.io/vran_vfio_fh: 1
               intel.com/intel_fec_lte: 1
-              cpu: "8"
+              cpu: "18"
             limits:
               ephemeral-storage: 10Gi
-              hugepages-1Gi: 4Gi
+              hugepages-1Gi: 10Gi
               memory: 10Gi
               openshift.io/vran_netdevice_mgmt_mh: 2
               openshift.io/vran_netdevice_mp: 1
               openshift.io/vran_vfio_fh: 1
               intel.com/intel_fec_lte: 1
-              cpu: "8"
+              cpu: "18"
           securityContext:
             privileged: true
             capabilities:
