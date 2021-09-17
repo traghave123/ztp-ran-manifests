@@ -68,7 +68,11 @@ spec:
                   macaddress: 56:91:90:01:01:02
               ens3:
                 addresses: [ 10.27.3.203/24 ]
-                set-name: ens3
+                routes:
+                - to: 10.21.13.0/24
+                  via: 10.27.3.1
+                  metric: 3                
+                set-name: ens3             
                 match:
                   macaddress: 56:91:90:01:01:03
           userData: |-
