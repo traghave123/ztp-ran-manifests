@@ -92,7 +92,7 @@ spec:
                         operator: Exists
                       containers:
                       - name: autosigner
-                        image: vran-prov-server.prov.ibmlab.lan:5000/olmlocal/autosigner:latest
+                        image: ran-21-kvm.comm.ibm.gsc:5000/olmlocal/autosigner:latest
                       - name: autolabeller
-                        image: vran-prov-server.prov.ibmlab.lan:5000/olmlocal/autolabeller:latest
+                        image: ran-21-kvm.comm.ibm.gsc:5000/olmlocal/autolabeller:latest
  
